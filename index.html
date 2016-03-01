@@ -94,7 +94,7 @@ function CalcVmem() {
             <div class="col-lg-12">
                 <h1 class="page-header"><p>Why use the calculator?</p>
                     <small id="ProductName"><p>GPDB virutal memory calculator estimates the best virtual memory settings based on exiting large scale deployments.  The linux kernel is very good at optimizing its own memory, but we still have to ensure we do not overallocation GPDB memory resulting in out of memory events.  This calculator helps the user reserve a conservative amount of memory for kernel while maximizing the amount of memory used by GPDB.</p>
-                    <p>For more information refer to GPDB <a href="http://gpdb.docs.pivotal.io/">documentaiton</a></p></small>
+                    <p>For more information refer to GPDB <a href="http://gpdb.docs.pivotal.io/" target="_blank">documentaiton</a></p></small>
                 </h1>
             </div>
         </div>
@@ -138,9 +138,10 @@ function CalcVmem() {
 <div class="control-group">
 	<label class="control-label" for="SegsPerNode">Primary Segments Per Node</label>
 	<div class="controls">
-		<input id="SegsPerNode" name="SegsPerNode" type="number" class="input-xlarge" value="7">
+		<input id="SegsPerNode" name="SegsPerNode" type="number" class="input-xlarge" value="8">
 		<a href="#" data-toggle="tooltip" data-placement="bottom" data-original-title="Number of primary you expect to run on a single segment server.  Also remember to account for failed mirrors if applicable">(?)</a>
 	</div>
+    
 </div>
 </fieldset>
 </form>
@@ -164,7 +165,22 @@ function CalcVmem() {
 
         </div>
         <!-- /.row -->
-        <hr>
+
+        </div class="row">
+
+            <div class="col-md-12">
+                <h3>Additional Notes:</h3>
+                <ul>
+                    <li>Choose the value for <strong>Primary Segments Per Node</strong> based on your mirroring strategy.  See GDPB <a href="http://gpdb.docs.pivotal.io/4360/admin_guide/highavail/topics/g-overview-of-segment-mirroring.html" target="_blank">Documentation</a> for more information on group and spread mirroring strategies
+                        <ul>
+                            <li>Given a configuration of 6 primaries and 6 mirrors we should set <strong>Primary Segments Per Node</strong> to 6+6=12 when using group mirroring</li>
+                            <li>Using the same configuration example for spread mirroring the value would be 6+2=8</li>
+                        </ul>
+
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div> <!-- /.container -->
 
 </body>
